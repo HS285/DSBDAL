@@ -1,0 +1,37 @@
+import nltk
+import string
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+from sklearn.feature_extraction.text import TfidfVectorizer
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+nltk.download('stopwords')
+doc = "Natural Language Processing is a branch of artificial intelligence that helps computers understand, interpret and manipulate human language."
+print("Original Document:\n", doc)
+tokens = word_tokenize(doc)
+print("\nTokenization:\n", tokens)
+pos_tags = pos_tag(tokens)
+print("\nPOS Tagging:\n", pos_tags)
+stop_words = set(stopwords.words('english'))
+tokens_no_stop = [word for word in tokens if word.lower() not in stop_words and word.isalpha()]
+print("\nAfter Stop Words Removal:\n", tokens_no_stop)
+stemmer = PorterStemmer()
+stemmed_words = [stemmer.stem(word) for word in tokens_no_stop]
+print("\nAfter Stemming:\n", stemmed_words)
+lemmatizer = WordNetLemmatizer()
+lemmatized_words = [lemmatizer.lemmatize(word.lower()) for word in tokens_no_stop]
+print("\nAfter Lemmatization:\n", lemmatized_words)
+docs = [
+    doc,
+    "Machine learning is an important part of artificial intelligence that enables computers to learn from data."
+]
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(docs)
+import pandas as pd
+tfidf_df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
+print("\nTF-IDF Representation:\n")
+print(tfidf_df)
