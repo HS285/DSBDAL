@@ -1,0 +1,65 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df=pd.read_csv("titanic.csv")  
+display(df.info())
+display(df.head())
+display(df.info())
+display(df.head())
+# 1. Survival rate by class
+plt.figure(figsize=(8, 5))
+sns.barplot(x='Pclass', y='Survived', hue='Pclass', data=df, errorbar=None, palette='coolwarm', legend=False)
+plt.xlabel('Passenger Class')
+plt.ylabel('Survival Rate')
+plt.title('Survival Rate by Passenger Class')
+plt.show()
+# 2. Survival rate by gender
+plt.figure(figsize=(8, 5))
+sns.barplot(x='Sex', y='Survived', hue='Sex', data=df, errorbar=None, palette='viridis', legend=False)
+plt.xlabel('Gender')
+plt.ylabel('Survival Rate')
+plt.title('Survival Rate by Gender')
+plt.show()
+# 3. Fare distribution by class
+plt.figure(figsize=(10, 5))
+sns.boxplot(x='Pclass', y='Fare', hue='Pclass', data=df, palette='Set2', legend=False)
+plt.xlabel('Passenger Class')
+plt.ylabel('Fare')
+plt.title('Fare Distribution by Passenger Class')
+plt.yscale('log')  # Log scale for better visualization
+plt.show()
+# 4. Age distribution by survival status
+plt.figure(figsize=(10, 5))
+sns.histplot(df, x='Age', hue='Survived', bins=30, kde=True, palette='magma', alpha=0.6)
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.title('Age Distribution by Survival Status')
+plt.show()
+# Plot the histogram of the 'Fare' column
+plt.figure(figsize=(10, 5))
+sns.histplot(df['Fare'], bins=30, kde=True, color='blue')
+plt.xlabel('Fare Price')
+plt.ylabel('Frequency')
+plt.title('Distribution of Ticket Prices (Fare)')
+plt.grid(True)
+plt.show()
+
+
+)
+🔹 4. Analyze Distribution
+Most passengers paid low fares (0–50 range)
+Very few passengers paid high fares (above 100)
+The data is not evenly distributed
+
+5. Identify Skewness
+
+👉 The Fare distribution is positively skewed (right-skewed)
+
+✔ Why?
+Long tail on the right side
+Majority values are clustered on the left
+Few extreme high values increase the mean
+
+print(df['fare'].skew())  #check skewness numerically 
+If result > 0 → Positive Skew
+If result < 0 → Negative Skew
