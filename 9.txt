@@ -1,0 +1,42 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Titanic dataset
+df=pd.read_csv("titanic.csv")  # Ensure the dataset is in the same directory
+# Display basic information and first few rows to inspect the dataset
+display(df.info())
+display(df.head())
+#Plot boxplot for numeric feature
+plt.figure(figsize=(7,5))
+sns.boxplot(y='age', data=df)
+
+plt.title("Boxplot of Age")
+plt.show()
+
+# Plot a box plot for Age distribution by Gender and Survival Status (Compare)
+plt.figure(figsize=(10, 5))
+sns.boxplot(x='Sex', y='Age', hue='Survived', data=df, palette='pastel')
+plt.xlabel('Gender')
+plt.ylabel('Age')
+plt.title('Age Distribution by Gender and Survival Status')
+plt.show()
+
+4. Identify Outliers
+
+👉 In the boxplot:
+
+Points outside whiskers = outliers
+In age, outliers may include:
+Very young infants
+Very old passengers
+🔹 5. Observations
+Median age of passengers is around 28–30 years
+Females show higher survival rate
+Younger passengers had slightly better survival chances
+Age distribution is spread with some extreme values (outliers)
+🔹 6. Inferences
+Gender played a major role in survival (females prioritized)
+Age has moderate impact (children slightly favored)
+Presence of outliers indicates diverse age group onboard
+Boxplot helps in visualizing spread and detecting anomalies
