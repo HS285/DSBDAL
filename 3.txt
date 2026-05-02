@@ -1,0 +1,24 @@
+import pandas as pd
+df=pd.read_csv("Sample_Data.csv")
+grouped = df.groupby('AgeGroup')
+summary_stats = grouped['Income'].agg(['mean', 'median', 'min', 'max', 'std'])
+print("Summary Statistics of Income grouped by Age Group:")
+print(summary_stats)
+grouped_lists = grouped['Income'].apply(list)
+print("\nList of Income values for each Age Group:")
+print(grouped_lists)
+
+#iris dataset
+import pandas as pd
+df = pd.read_csv("Iris.csv")
+print("First 5 rows of the dataset:")
+print(df.head())
+df
+print("\nUnique Species:")
+print(df["Species"].unique())
+def display_statistics(species_name):
+    print(f"\n--- Statistics for {species_name} ---")
+    species_df = df[df['Species'] == species_name]
+    print(species_df.describe())
+
+display_statistics('Iris-setosa')
