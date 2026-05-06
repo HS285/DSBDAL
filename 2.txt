@@ -29,7 +29,7 @@ upper = Q3 + 1.5 * IQR
 
 lower
 upper
-
+#outliers
 df['Math_Score'] = np.where(df['Math_Score'] > upper, upper, df['Math_Score'])
 df
 #data transformation (log transformation)
